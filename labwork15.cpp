@@ -13,28 +13,35 @@ using namespace std;
     int inch;
     int feet;
     public:
-    Distance(int i,int f){
-        inch=i;
-        feet=f;
+
+   Distance(int i = 0, int f = 0) {
+        inch = i;
+        feet = f;
     }
-    void sum(Distance obj1,Distance obj2){
+
+
+     Distance sum(Distance obj1, Distance obj2) {
        Distance obj3;
         obj3.feet=obj1.feet+obj2.feet;
+
         obj3.inch=obj1.inch+obj2.inch;
+
         obj3.feet=obj3.feet+obj3.inch/12;
+
         obj3.inch=obj3.inch%12;
+
         return obj3;
     }
     void display(){
-        cout<<"The sum is "<<sum()<<endl;
+       cout << "Feet: " << feet << ", Inches: " << inch << endl;
     
     }
  };
  int main(){
-    Distance obj1,obj2,obj3;
-    obj1(2,5);
-    obj2(3,6);
-    obj3=obj3.sum(obj1,obj2);
-    obj3.display();
+    Distance d3;
+  Distance d1(5, 8);
+    Distance d2(5, 8);
+     d3=d3.sum(d1,d2);
+    d3.display();
     return 0;
  }
