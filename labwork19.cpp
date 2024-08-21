@@ -2,49 +2,39 @@
 19.Define a class BankAccount with data members for the account number
 and balance. Implement member functions to deposit and withdraw money, defined outside the class using the scope resolution operator. Create an object and perform some transactions to demonstrate these  functions.
 */
-#include<iostream>
+#include <iostream>
 using namespace std;
-class BankAccount{
- int accountnumber;
- double balance;
- public:
-  void Input(int accNumber, double initialBalance);
-  void Deposit(double amount);
-  void withdraw(double amount);
-  void Display();
-   
-};
- void BankAccount::Input (int accNumber, double initialBalance){
-    cout<<"Enter the Account number and Balance"<<endl;
-    cin>> accNumber>>initialBalance;
-  }
 
-    void BankAccount::Deposit(double amount);{
-    if (amount > 0) {
+class BankAccount {
+    int accountNumber;
+    double balance;
+
+public:
+    BankAccount(int accNumber, double initialBalance)
+        : accountNumber(accNumber), balance(initialBalance) {}
+
+    void deposit(double amount) { 
         balance += amount;
-        cout << "Deposited: $" << amount << endl;
-    } else {
-        cout << "Invalid deposit amount!" << endl;
+         }
+    void withdraw(double amount) { 
+        balance -= (amount <= balance) ? amount : 0; 
+        }
+
+    void display() const {
+        cout << "Account Number: " << accountNumber << ", Balance: $" << balance << endl;
     }
-    }
-   void BankAccount:: withdraw(){
-     if (amount > 0 && amount <= balance) {
-        balance -= amount;
-        cout << "Withdrew: $" << amount << endl;
-    } else if (amount > balance) {
-        cout << "Insufficient balance!" << endl;
-    } else {
-        cout << "Invalid withdrawal amount!" << endl;
-    }
-  }
-      void BankAccount:: Display(){
-     cout<<"The withdrawn money is  "<<bal<<endl;
-    }
-      
-int main(){
-    BankAccount b;
-    b.Input();    
-    b.withdraw();
-    b.Display();
+};
+
+int main() {
+    BankAccount myAccount(123456, 500.0);
+    
+    myAccount.display();
+    myAccount.deposit(200.0);
+    myAccount.display();
+    myAccount.withdraw(150.0);
+    myAccount.display();
+    myAccount.withdraw(600.0); // Attempt to withdraw more than balance
+    myAccount.display();
+
     return 0;
 }
